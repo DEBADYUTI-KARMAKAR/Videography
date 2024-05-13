@@ -1,12 +1,12 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 
-const Header = () => {
+const BookMark = () => {
   return (
     <View>
-      <Text className='text-purple-400'>Header</Text>
+      <Text>BookMark</Text>
     </View>
   )
 }
 
-export default Header
+export default BookMark

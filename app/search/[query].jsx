@@ -1,12 +1,12 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 
-const AwthLayout = () => {
+const Search = () => {
   return (
     <View>
-      <Text>AwthLayout</Text>
+      <Text>Search</Text>
     </View>
   )
 }
 
-export default AwthLayout
+export default Search

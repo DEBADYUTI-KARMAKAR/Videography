@@ -10,7 +10,7 @@ export default function index() {
       <Text className="text-3xl font-pblack">Videoraphy</Text>
       <StatusBar style='auto' />
 
-      <Link href='/profile'>Go to Profile</Link>
+      <Link href='/home'>Go to home</Link>
     </View>
   )
 }
