@@ -39,15 +39,15 @@ const logout=async()=>{
               resizeMode="contain" className="w-6 h-6"
               />
             </TouchableOpacity>
-            <View className="w-16 h-16 border border-secondary rounded-lg justify-center
+            <View className="w-28 h-28 border border-secondary rounded-full justify-center
             items-center
             ">
               <Image source={{uri:user?.avatar}}
-              className="w-[100%] h-[100%] rounded-lg" 
+              className="w-[100%] h-[100%] rounded-full" 
               resizeMode="cover"/>
             </View>
             <InfoBox
-            title={user?.username}
+            title={(user?.username).toUpperCase()}
             containerStyles="mt-5"
             titleStyles="text-lg"
             />

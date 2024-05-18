@@ -48,16 +48,21 @@ const SignIn = () => {
     <SafeAreaView className="bg-primary h-full ">
       <ScrollView>
         <View className="w-full justify-center h-[700px] px-4 my-6 ">
-          <Image
-            source={images.logo}
-            resizeMode="contain"
-            className="w-[115px] h-[35px]"
-          />
-
-          <Text className="text-3xl  text-white text-semibold mt-10 font-psemibold">
-            Log in
-          </Text>
-
+          <View className="flex flex-col justify-center items-center">
+            <View className="flex flex-row items-center justify-center ">
+              <Image
+                source={images.logoSmall}
+                className="w-[70px] h-[50px]"
+                resizeMode="contain"
+              />
+              <Text className="text-white font-psemibold text-3xl">
+                Videography
+              </Text>
+            </View>
+            <Text className="text-3xl  text-white text-semibold mt-10 font-psemibold">
+              Log in
+            </Text>
+          </View>
           <FormField
             title="Email"
             value={form.email}
