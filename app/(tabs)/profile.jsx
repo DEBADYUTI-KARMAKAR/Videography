@@ -47,7 +47,7 @@ const logout=async()=>{
               resizeMode="cover"/>
             </View>
             <InfoBox
-            title={(user?.username).toUpperCase()}
+            title={(user?.username)}
             containerStyles="mt-5"
             titleStyles="text-lg"
             />
