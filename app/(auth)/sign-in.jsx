@@ -1,79 +1,99 @@
-import { Link } from "expo-router";
-import React, { useState } from "react";
 import {
-  Button,
-  Image,
+  View,
+  Text,
   SafeAreaView,
   ScrollView,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
+  Image,
+  Alert,
 } from "react-native";
-import FormField from "../../components/FromField";
-import { icons } from "../../constants";
+import React, { useState } from "react";
 import { images } from "../../constants";
-import { StatusBar } from "expo-status-bar";
+import FormField from "../../components/FromField";
 import CustomButton from "../../components/CustomButton";
-// import { getCurrentUser, signIn } from "../../lib/appwrite";
-// import { useGlobalContext } from "../../context/GlobalProvider";
+import { Link, router } from "expo-router";
+import { getCurrentUser, signIn } from "../../lib/appwrite";
+import { useGlobalContext } from "../../context/GlobalProvider";
 const SignIn = () => {
-  const [showPassword, setShowPassword] = useState(false);
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+  });
+
+  const { setUser, setIsLoggedIn } = useGlobalContext();
+  const [isSubmitting, setSubmitting] = useState(false);
+
+  const submit = async () => {
+    if (form.email === "" || form.password === "") {
+      Alert.alert("Error", "Please fill in all fields");
+    }
+
+    setSubmitting(true);
+
+    try {
+      await signIn(form.email, form.password);
+      const result = await getCurrentUser();
+      setUser(result);
+      setIsLoggedIn(true);
+
+      Alert.alert("Success", "User signed in successfully");
+      router.replace("/home");
+    } catch (error) {
+      Alert.alert("Error", error.message);
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   return (
-    <SafeAreaView className="h-full bg-white">
+    <SafeAreaView className="bg-primary h-full ">
       <ScrollView>
-        <View className="w-full justify-center h-[700px] px-4 my-6">
+        <View className="w-full justify-center h-[700px] px-4 my-6 ">
           <View className="flex flex-col justify-center items-center">
-            <View className="flex flex-row items-center justify-center mb-12">
+            <View className="flex flex-row items-center justify-center ">
               <Image
                 source={images.logoSmall}
                 className="w-[70px] h-[50px]"
                 resizeMode="contain"
               />
-
-              <Text className="text-black text-3xl">Company name</Text>
+              <Text className="text-white font-psemibold text-3xl">
+                Videography
+              </Text>
             </View>
-            <View className="flex flex-col items-baseline justify-center  ">
-              <View className="mb-4">
-                <Text className="text-4xl font-bold">Let's sign you in</Text>
-                <Text className="text-[20px]  mr-9 text-gray-500 mt-3">
-                  Welcome Back,
-                </Text>
-                <Text className="text-[20px]  mr-9 text-gray-500 ">
-                  You have been missed!!
-                </Text>
-              </View>
-              <View className="my-5">
-                {/* <Text className="text-base text-gray-100 ">
-                Email
-              </Text> */}
-                <FormField
-                  placeholder={"Enter your email id"}
-                  title="Email"
-                  otherStyles="w-full"
-                  keyboardType="email-address"
-                />
-              </View>
-              <View>
-                <FormField title="Password"
-                placeholder={"Enter your password"}
-                otherStyles="w-full" />
-              </View>
-            </View>
-            <View className="w-full items-end mt-4">
-              <Text className="text-indigo-500">Forgot Password?</Text>
-            </View>
-            <CustomButton title="Login" containerStyles="w-full mt-7 " />
+            <Text className="text-3xl  text-white text-semibold mt-10 font-psemibold">
+              Log in
+            </Text>
           </View>
+          <FormField
+            title="Email"
+            value={form.email}
+            handleChangeText={(e) => setForm({ ...form, email: e })}
+            otherStyles="mt-7"
+            keyboardType="email-address"
+          />
+          <FormField
+            title="Password"
+            value={form.password}
+            handleChangeText={(e) => setForm({ ...form, password: e })}
+            otherStyles="mt-7"
+          />
+          <CustomButton
+            title="Sign in"
+            containerStyles="mt-7"
+            handlePress={submit}
+            isLoading={isSubmitting}
+          />
           <View className="justify-center pt-5 flex-row gap-2">
-            <Text className="text-lg text-gray-100 ">Don't have account?</Text>
-            <Link href="/sign-up" className="text-lg text-indigo-500 ">
+            <Text className="text-lg text-gray-100 font-pregular">
+              Don't have account?
+            </Text>
+            <Link
+              href="/sign-up"
+              className="text-lg text-secondary-100 font-psemibold"
+            >
               Sign Up
             </Link>
           </View>
         </View>
-        <StatusBar backgroundColor="#ffffff" style="dark" />
       </ScrollView>
     </SafeAreaView>
   );
