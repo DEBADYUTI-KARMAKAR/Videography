@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "VideoApp",
-    "slug": "videoapp",
-    "scheme": "videoapp",
+    "name": "Project",
+    "slug": "project",
+    "scheme": "project",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -23,7 +23,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package":"com.debadyuti.videography"
+      "package":""
     },
     "web": {
       "favicon": "./assets/favicon.png"
